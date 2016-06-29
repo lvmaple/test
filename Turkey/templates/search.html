@@ -1,0 +1,69 @@
+<!--<html>-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
+<!--<title></title>-->
+<!--<script type="text/javascript" src="/static/jquery-1.12.3.min.js"></script>-->
+<!--<script type="text/javascript" src="/static/addLine.js"></script>-->
+<!--<script type="text/javascript" document.oncontextmenu=''>-->
+
+<!--</script>-->
+<!--</head>-->
+<!--<body >-->
+
+<!--<form id="search">-->
+<!--<div id="tablediv" style="width: 90%;">-->
+<!--<table id="Ltable" border="1" cellpadding="2" cellspacing="0" width="90%" style="background-color: #b9d8f3;">-->
+<!--<tr>-->
+<!--<th width='45%' height='20px'>Column</th>-->
+<!--<th width='45%' height='20px'>Value</th>-->
+<!--<th width='5%' height='20px'>value</th>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</div>-->
+<!--<div id="addtrdiv" style="width: 10%; float: right;">-->
+<!--<a href="#" class="easyui-linkbutton" iconCls="icon-add" onclick="addtr()"><span key="ss" class="paltform">添加行</span></a>-->
+<!--</div>-->
+<!--<div class="button_area_absolute">-->
+<!--<table width="90%">-->
+<!--<tr>-->
+<!--<td align=center><a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveinfo()"><span key="save" class="paltform">保存</span></a></td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</div>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+<html>
+<body>
+<form id="search" name="search" action="/result/" method="post">
+    <div id="tableDiv" style="width: 100%;">
+        <table id="table" border="1" width="100%" style="background-color: #b9d8f3;">
+            <tr>
+                <th width='45%' height='20px'>FirstName</th>
+                <th width='45%' height='20px'>LastName</th>
+                <th width='10%' height='20px'>FuzzyQuery</th>
+            </tr>
+            <tr>
+                <td width='45%' height='20px'><input name="FirstName" type="text" style="width:100%" /></td>
+                <td width='45%' height='20px'><input name="LastName" type="text" style="width:100%" /></td>
+                <td width='10%' height='20px' align="center"><input name="FuzzyQuery" type="radio" value="False" checked></td>
+            </tr>
+            <tr>
+                <td colspan="2" height="20px"><input name="SqlStr" type="text" style="width: 100%" /><br>
+                Ex:select * from citizen where last='CAN'</td>
+                <td width='10%' height="20px" align="center"><input name="FuzzyQuery" type="radio" value="True"></td>
+            </tr>
+        </table>
+        <input type="text" style="display: none" name="PageNum" value="0">
+        <table id="action" border="0" width="90%">
+            <tr>
+                <th width="45%" height="30" align="center" valign="middle"><input type="submit" value="Search"></th>
+                <th width="45%" height="30" align="center" valign="middle"><input type="reset" value="Reset"></th>
+            </tr>
+
+        </table>
+    </div>
+</form>
+</body>
+</html>

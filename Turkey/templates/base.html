@@ -1,0 +1,84 @@
+<html>
+<body>
+{% block content %}
+
+<form id="search" name="search" action="/result/" method="post">
+    <div id="tableDiv" style="width: 100%;">
+        <table id="table" border="1" width="100%" style="background-color: #b9d8f3;">
+            <tr>
+                <th width='45%' height='20px'>FirstName</th>
+                <th width='45%' height='20px'>LastName</th>
+                <th width='10%' height='20px'>FuzzyQuery</th>
+            </tr>
+            <tr>
+                <td width='45%' height='20px'><input name="FirstName" type="text" style="width:100%" /></td>
+                <td width='45%' height='20px'><input name="LastName" type="text" style="width:100%" /></td>
+                <td width='10%' height='20px' align="center"><input name="FuzzyQuery" type="radio" value="False" checked></td>
+            </tr>
+            <tr>
+                <td colspan="2" height="20px"><input name="SqlStr" type="text" style="width: 100%" /><br>
+                Ex:select * from citizen where last='CAN'</td>
+                <td width='10%' height="20px" align="center"><input name="FuzzyQuery" type="radio" value="True"></td>
+            </tr>
+        </table>
+        <input type="text" style="display: none" name="PageNum" value="0">
+        <table id="action" border="0" width="90%">
+            <tr>
+                <th width="45%" height="30" align="center" valign="middle"><input type="submit" value="Search"></th>
+                <th width="45%" height="30" align="center" valign="middle"><input type="reset" value="Reset"></th>
+            </tr>
+
+        </table>
+    </div>
+</form>
+{% endblock %}
+
+{% block table %}
+<h5> The number of results is {{count}} in this page.</h5>
+<h5>Current Page {{pageNum + 1}}</h5>
+<table id="table" border="1" style="background-color: #b9d8f3; overflow: auto;">
+    <tr>
+        <th>Uid</th>
+        <th>National_Identifier</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Mother_First</th>
+        <th>Father_First</th>
+        <th>Gender</th>
+        <th>Birth_City</th>
+        <th>Date_Of_Birth</th>
+        <th>Id_Registration_City</th>
+        <th>Id_Registration_District</th>
+        <th>Address_City</th>
+        <th>Address_District</th>
+        <th>Address_Neighborhood</th>
+        <th>Street_Address</th>
+        <th>Door_Or_Entrance_Number</th>
+        <th>Misc</th>
+    </tr>
+    {% for turkey in turkeyList %}
+    <tr>
+        <td>{{turkey.uid}}</td>
+        <td>{{turkey.national_identifier}}</td>
+        <td>{{turkey.first}}</td>
+        <td>{{turkey.last}}</td>
+        <td>{{turkey.mother_first}}</td>
+        <td>{{turkey.father_first}}</td>
+        <td>{{turkey.gender}}</td>
+        <td>{{turkey.birth_city}}</td>
+        <td>{{turkey.date_of_birth}}</td>
+        <td>{{turkey.id_registration_city}}</td>
+        <td>{{turkey.id_registration_district}}</td>
+        <td>{{turkey.address_city}}</td>
+        <td>{{turkey.address_district}}</td>
+        <td>{{turkey.address_neighborhood}}</td>
+        <td>{{turkey.street_address}}</td>
+        <td>{{turkey.door_or_entrance_number}}</td>
+        <td>{{turkey.misc}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
+</body>
+</html>

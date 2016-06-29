@@ -1,0 +1,27 @@
+<html>
+<body style="overflow: auto">
+
+{% include 'base.html' %}
+
+{% if pageNum != 0 %}
+<form name="result" action="/result/" method="post">
+    <input type="text" style="display: none" name="FirstName" value="{{firstName}}" >
+    <input type="text" style="display: none" name="LastName" value="{{lastName}}" >
+    <input type="text" style="display: none" name="FuzzyQuery" value="{{fuzzyQuery}}" >
+    <input type="text" style="display: none" name="PageNum" value="{{pageNum - 1}}">
+    <input type="submit" value="LastPage">
+</form>
+{% endif %}
+
+{% if count==50 %}
+<form name="result" action="/result/" method="post">
+    <input type="text" style="display: none" name="FirstName" value="{{firstName}}" >
+    <input type="text" style="display: none" name="LastName" value="{{lastName}}" >
+    <input type="text" style="display: none" name="FuzzyQuery" value="{{fuzzyQuery}}" >
+    <input type="text" style="display: none" name="PageNum" value="{{pageNum + 1}}">
+    <input type="submit" value="NextPage">
+</form>
+{% endif %}
+
+</body>
+</html>
