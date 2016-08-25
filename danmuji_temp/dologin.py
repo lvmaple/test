@@ -16,7 +16,8 @@ lastDayDateStr = datetime.datetime.strftime(lastDayDate, "%Y-%m-%d")
 picname = "vdcode.png"
 vdUrl = "https://passport.bilibili.com/captcha"
 goLoginUrl = "https://passport.bilibili.com/login"
-loginUrl="https://account.bilibili.com/login/dologin"
+# loginUrl="https://account.bilibili.com/login/dologin"
+loginUrl = "https://passport.bilibili.com/ajax/miniLogin/login"
 # accountUrl="http://account.bilibili.cn/crossDomain?Expires=604800&DedeUserID=7385982&DedeUserID__ckMd5=258b1b7cb17d993c&SESSDATA=c4090d71,1450773446,55659e39&gourl=http://www.bilibili.com/"
 # mainUrl = "http://www.bilibili.com/"
 memberUrl = "http://member.bilibili.com"
@@ -45,25 +46,30 @@ def toLogin():
 
 def login():
     # '''开始登录'''
-    config.COOKIE = http.cookiejar.CookieJar()
-    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(config.COOKIE))
+
     username = input("please input your username: ")
     password = input("please input your password: ")
     while True:
-        getVdCode()
-        vdcode = input("please input your vdcode: ")
+        # getVdCode()
+        # vdcode = input("please input your vdcode: ")
         # 登录
         post_dict = {
             'userid': username,
             'pwd': password,
-            'vdcode': vdcode
+            # 'vdcode': vdcode
+            'captcha': "",
+            'keep': "1"
         }
         post_data = urllib.parse.urlencode(post_dict).encode("utf-8")
+        # req = urllib.request.Request(loginUrl, post_data)
+        # res = opener.open(req)
         req = urllib.request.Request(loginUrl, post_data)
-        res = opener.open(req)
+        req.add_header("Referer", "https://passport.bilibili.com/ajax/miniLogin/minilogin?131166139132641157")
+        res = urllib.request.urlopen(req)
 
         # res = requests.post(loginUrl, post_dict)
         print(res.read().decode("utf-8"))
+        print(config.COOKIE)
         # break
         if "验证码错误，请重新输入" in res.read().decode("utf-8"):
             continue
@@ -95,8 +101,8 @@ def login():
 
 def dologin():
     print( "===%s start===%s"%(sys.argv[0], datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")))
-    # dealCookie()
-    toLogin()
+    dealCookie()
+    # toLogin()
     # getVdCode()
     login()
     print( "===%s end===%s"%(sys.argv[0], datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")))
@@ -104,3 +110,5 @@ def dologin():
 # #################################################################################
 # if __name__ == "__main__":
 #     main()
+
+dologin()
